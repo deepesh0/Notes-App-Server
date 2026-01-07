@@ -15,12 +15,13 @@ export const UserSchema = new mongoose.Schema({
         required:[true, 'Email is required']
     },
     profile_image: {
+        required:[true,"Profile Required"],
         type: {
             path: String,
             public_id:String,
             
         },
-        required:[true,"Profile Required"]
+        
     },
     password:{
         type:String,

@@ -26,7 +26,7 @@ export const authenticate = (roles?: Role[]) => {
       }
       if (decodedData?.exp && decodedData?.exp * 1000 < Date.now()) {
         res.clearCookie("access_token", {
-          sameSite: "none",
+          sameSite: process.env.NODE_ENV === "development" ?"lax": "none",
           httpOnly: true,
           secure: process.env.NODE_ENV === "development" ? false : true,
           maxAge: Date.now(),
@@ -37,9 +37,11 @@ export const authenticate = (roles?: Role[]) => {
         _id: decodedData?._id,
         email: decodedData?.email,
       });
+      console.log(user)
+
       if (!user) {
         res.clearCookie("access_token", {
-          sameSite: "none",
+          sameSite: "lax",
           httpOnly: true,
           secure: process.env.NODE_ENV === "development" ? false : true,
           maxAge: Date.now(),
@@ -57,7 +59,8 @@ export const authenticate = (roles?: Role[]) => {
         Role: user.role,
       };
 
-      next();
+      next()
+      
     } catch (error) {
       next(error);
     }

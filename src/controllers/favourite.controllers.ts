@@ -43,7 +43,7 @@ export const getAll = async (
 ) => {
   const user_id = req.user?._id;
   try {
-    const list = await FavList.findOne({ user: user_id });
+    const list = await FavList.find({ user: user_id }).populate('user').populate('note');
     res.status(200).json({
       message: "Your wishlist",
       data: list,
