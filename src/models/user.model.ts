@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { Role } from '../@types/enum.ts';
+import { Role } from '../@types/enum';
 
 export const UserSchema = new mongoose.Schema({
     first_name:{

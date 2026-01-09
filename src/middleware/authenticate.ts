@@ -37,7 +37,7 @@ export const authenticate = (roles?: Role[]) => {
         _id: decodedData?._id,
         email: decodedData?.email,
       });
-      console.log(user)
+      // console.log(user)
 
       if (!user) {
         res.clearCookie("access_token", {
