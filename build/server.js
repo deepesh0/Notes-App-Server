@@ -18,14 +18,15 @@ const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3000;
 // console.log(process.env.PORT)
 //middleware
-app.use((0, cors_1.default)({ origin: 'http://localhost:5173',
-    credentials: true
-}));
+app.use((0, cors_1.default)({ origin: "http://localhost:5173", credentials: true }));
 app.use((0, cookie_parser_1.default)());
 // app.use(express.json());
-app.use(express_1.default.json({ limit: '5mb' }));
-app.use('/api/uploads', express_1.default.static('uploads/'));
+app.use(express_1.default.json({ limit: "5mb" }));
+app.use("/api/uploads", express_1.default.static("uploads/"));
 app.use(rateLimiter_js_1.default);
+app.get("/", (req, res) => {
+    res.send("you are in notes");
+});
 app.use((req, res, next) => {
     console.log(`Req method id ${req.method} & Req URL is ${req.url}`);
     next();
@@ -33,9 +34,6 @@ app.use((req, res, next) => {
 app.use("/api/notes", notesRoutes_js_1.default);
 app.use("/api/auth", userRoutes_1.default);
 app.use("/api/favourites", favouriteRoutes_js_1.default);
-// app.get("/api/notes", (req,res) =>{
-//     res.send("you are in notes");
-// })
 // app.post("/api/notes",(req,res) =>{
 //     res.status(201).json({message:"post posted"});
 // })
